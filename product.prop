@@ -1,6 +1,9 @@
 # Apex
 ro.apex.updatable=false
 
+# FS-verity
+ro.apk_verity.mode=2
+
 # LMKD
 ro.lmk.low=1001
 ro.lmk.medium=800
