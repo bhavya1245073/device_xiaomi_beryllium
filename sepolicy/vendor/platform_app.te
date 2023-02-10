@@ -6,8 +6,3 @@ allow platform_app sysfs_graphics:file r_file_perms;
 
 # Audio Prop
 get_prop(platform_app, vendor_audio_prop)
-
-# System Info
-allow platform_app sysfs_battery_supply:dir { search };
-allow platform_app sysfs_kgsl:file { read open getattr ioctl };
-allow platform_app sysfs_battery_supply:file { read open getattr ioctl };
