@@ -20,6 +20,9 @@ PRODUCT_PACKAGES += \
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
+	
+# APEX
+OVERRIDE_TARGET_FLATTEN_APEX := true
 
 # Permissions
 PRODUCT_COPY_FILES += \
