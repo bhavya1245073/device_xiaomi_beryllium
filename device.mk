@@ -669,3 +669,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wfdconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/wfdconfig.xml
+
+# Call MiCam setup
+$(call inherit-product, vendor/miuicamera/config.mk)
