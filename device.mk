@@ -420,7 +420,7 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.lights-service.xiaomi_sdm845 \
+    android.hardware.lights-service.beryllium \
     android.hardware.light@2.0 \
     android.hardware.light@2.0.vendor
 
@@ -620,7 +620,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.vibrator.service.xiaomi_sdm845
+    vendor.qti.hardware.vibrator.service.beryllium
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml

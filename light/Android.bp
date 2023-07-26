@@ -16,8 +16,8 @@
 cc_binary {
     relative_install_path: "hw",
     defaults: ["hidl_defaults"],
-    name: "android.hardware.light@2.0-service.xiaomi_sdm845",
-    init_rc: ["hidl/android.hardware.light@2.0-service.xiaomi_sdm845.rc"],
+    name: "android.hardware.light@2.0-service.beryllium",
+    init_rc: ["hidl/android.hardware.light@2.0-service.beryllium.rc"],
     srcs: ["hidl/service.cpp", "hidl/Light.cpp"],
     vendor: true,
     shared_libs: [
@@ -31,10 +31,10 @@ cc_binary {
 }
 
 cc_binary {
-    name: "android.hardware.lights-service.xiaomi_sdm845",
+    name: "android.hardware.lights-service.beryllium",
     relative_install_path: "hw",
-    init_rc: ["aidl/android.hardware.lights-xiaomi_sdm845.rc"],
-    vintf_fragments: ["aidl/android.hardware.lights-xiaomi_sdm845.xml"],
+    init_rc: ["aidl/android.hardware.lights-beryllium.rc"],
+    vintf_fragments: ["aidl/android.hardware.lights-beryllium.xml"],
     vendor: true,
     shared_libs: [
         "libbase",
