@@ -8,6 +8,11 @@
 
 set -e
 
+export DEVICE=beryllium
+export VENDOR=xiaomi
+
+"./../../${VENDOR}/${DEVICE}/setup-makefiles.sh" "$@"
+
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "${MY_DIR}" ]]; then MY_DIR="${PWD}"; fi
@@ -22,10 +27,10 @@ fi
 source "${HELPER}"
 
 # Initialize the helper for common
-setup_vendor "${DEVICE_COMMON}" "${VENDOR}" "${ANDROID_ROOT}" true
+setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" true
 
 # Warning headers and guards
-write_headers "beryllium dipper equuleus perseus polaris ursa"
+write_headers "beryllium"
 
 # The standard common blobs
 write_makefiles "${MY_DIR}/proprietary-files.txt" true
