@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.lights-service.xiaomi_sdm845"
+#define LOG_TAG "android.hardware.lights-service.beryllium"
 
 #include "Lights.h"
 #include <log/log.h>
