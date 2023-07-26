@@ -5,6 +5,16 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
+if [ "${BASH_SOURCE[0]}" != "${0}" ]; then
+    return
+fi
+
+set -e
+
+export DEVICE=beryllium
+export VENDOR=xiaomi
+
+"./../../${VENDOR}/${DEVICE}/extract-files.sh" "$@"
 
 set -e
 
@@ -93,7 +103,7 @@ fi
 
 if [ -z "${ONLY_TARGET}" ]; then
     # Initialize the helper for common device
-    setup_vendor "${DEVICE_COMMON}" "${VENDOR}" "${ANDROID_ROOT}" true "${CLEAN_VENDOR}"
+    setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" true "${CLEAN_VENDOR}"
 
     extract "${MY_DIR}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
 fi

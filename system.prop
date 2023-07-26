@@ -1,3 +1,20 @@
+# Blurs
+ro.surface_flinger.supports_background_blur=0
+
+# Camera
+persist.vendor.camera.perfcapture=1
+
+# Recovery
+ro.recovery.ui.margin_height=87
+
+# Graphics
+ro.surface_flinger.has_HDR_display=true
+
+# Zram
+ro.zram.mark_idle_delay_mins=60
+ro.zram.first_wb_delay_mins=1440
+ro.zram.periodic_wb_delay_hours=24
+
 # Audio
 audio.deep_buffer.media=true
 audio.offload.min.duration.secs=30

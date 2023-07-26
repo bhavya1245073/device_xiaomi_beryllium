@@ -219,3 +219,8 @@ zygote.critical_window.minute=10
 # Phantom process monitoring
 sys.fflag.override.settings_enable_monitor_phantom_procs=false
 
+# Display postprocessing
+vendor.display.enable_default_color_mode=1
+
+# FM
+vendor.hw.fm.init=0
