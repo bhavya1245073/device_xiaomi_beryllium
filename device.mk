@@ -54,9 +54,6 @@ PRODUCT_PACKAGES += \
 # Treble
 PRODUCT_USE_VNDK_OVERRIDE := true
 
-# Inherit from sdm845-common
-$(call inherit-product, device/xiaomi/sdm845-common/sdm845.mk)
-
 # Audio
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
@@ -672,7 +669,3 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wfdconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/wfdconfig.xml
-
-# Inherit the proprietary files
-$(call inherit-product, vendor/xiaomi/sdm845-common/sdm845-common-vendor.mk)
-
