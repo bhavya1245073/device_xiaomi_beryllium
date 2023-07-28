@@ -28,8 +28,8 @@ set -e
 MY_DIR="${PWD}"
 
 VENDOR_DIR="${MY_DIR}"/../../../vendor/xiaomi
-DEVICE=sdm845-common
-DIR_PREFIX="sdm845-common/proprietary/"
+DEVICE=beryllium
+DIR_PREFIX="beryllium/proprietary/"
 
 cd "${VENDOR_DIR}"
 
