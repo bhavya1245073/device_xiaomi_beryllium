@@ -1,22 +1,15 @@
 #!/bin/bash
 #
 # Copyright (C) 2016 The CyanogenMod Project
-# Copyright (C) 2017-2020 The LineageOS Project
+# Copyright (C) 2017-2021 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
-if [ "${BASH_SOURCE[0]}" != "${0}" ]; then
-    return
-fi
 
 set -e
 
-export DEVICE=beryllium
-export VENDOR=xiaomi
-
-"./../../${VENDOR}/${DEVICE}/extract-files.sh" "$@"
-
-set -e
+DEVICE=beryllium
+VENDOR=xiaomi
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
@@ -30,6 +23,35 @@ if [ ! -f "${HELPER}" ]; then
     exit 1
 fi
 source "${HELPER}"
+
+# Default to sanitizing the vendor folder before extraction
+CLEAN_VENDOR=true
+
+KANG=
+SECTION=
+
+while [ "${#}" -gt 0 ]; do
+    case "${1}" in
+        -n | --no-cleanup )
+                CLEAN_VENDOR=false
+                ;;
+        -k | --kang )
+                KANG="--kang"
+                ;;
+        -s | --section )
+                SECTION="${2}"; shift
+                CLEAN_VENDOR=false
+                ;;
+        * )
+                SRC="${1}"
+                ;;
+    esac
+    shift
+done
+
+if [ -z "${SRC}" ]; then
+    SRC="adb"
+fi
 
 function blob_fixup() {
     case "${1}" in
@@ -54,66 +76,18 @@ function blob_fixup() {
         system_ext/lib64/lib-imsvideocodec.so)
             "${PATCHELF}" --add-needed "lib-imsvtshim.so" "${2}"
             ;;
-    esac
-}
-
-# Default to sanitizing the vendor folder before extraction
-CLEAN_VENDOR=true
-
-ONLY_COMMON=
-ONLY_TARGET=
-SECTION=
-KANG=
-
-while [ "${#}" -gt 0 ]; do
-    case "${1}" in
-        --only-common )
-                ONLY_COMMON=true
-                ;;
-        --only-target )
-                ONLY_TARGET=true
-                ;;
-        -n | --no-cleanup )
-                CLEAN_VENDOR=false
-                ;;
-        -k | --kang )
-                KANG="--kang"
-                ;;
-        -s | --section )
-                SECTION="${2}"; shift
-                CLEAN_VENDOR=false
-                ;;
-        * )
-                SRC="${1}"
-                ;;
-
-system_ext/lib64/lib-imsvideocodec.so)
+        system_ext/lib64/lib-imsvideocodec.so)
             ${PATCHELF} --add-needed "lib-imsvtshim.so" "${2}"
             ;;
-vendor/lib/camera/components/com.mi.node.watermark.so)
+        vendor/lib/camera/components/com.mi.node.watermark.so)
             "${PATCHELF}" --add-needed "lib-watermarkshim.so" "${2}"
             ;;
     esac
-    shift
-done
+}
 
-if [ -z "${SRC}" ]; then
-    SRC="adb"
-fi
+# Initialize the helper
+setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" false "${CLEAN_VENDOR}"
 
-if [ -z "${ONLY_TARGET}" ]; then
-    # Initialize the helper for common device
-    setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" true "${CLEAN_VENDOR}"
-
-    extract "${MY_DIR}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
-fi
-
-if [ -z "${ONLY_COMMON}" ] && [ -s "${MY_DIR}/../${DEVICE}/proprietary-files.txt" ]; then
-    # Reinitialize the helper for device
-    source "${MY_DIR}/../${DEVICE}/extract-files.sh"
-    setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" false "${CLEAN_VENDOR}"
-
-    extract "${MY_DIR}/../${DEVICE}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
-fi
+extract "${MY_DIR}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
 
 "${MY_DIR}/setup-makefiles.sh"
