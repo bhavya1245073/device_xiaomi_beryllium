@@ -1,5 +1,6 @@
 #
-# Copyright (C) 2018-2022 The LineageOS Project
+# Copyright (C) 2019-2022 The LineageOS Project
+# Copyright (C) 2023 The Project Elixir
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -7,14 +8,23 @@
 # Inherit from beryllium device
 $(call inherit-product, device/xiaomi/beryllium/device.mk)
 
-# Inherit some common lineage stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+# Inherit some common Project Elixir stuff.
+$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
-# LineageOS Specific Flags
+# Bootanimation
 TARGET_BOOT_ANIMATION_RES := 1080
 
+# Project-Elixir Official Stuff
+IS_PHONE := true
+ELIXIR_BUILD_TYPE := OFFICIAL
+TARGET_SUPPORTS_QUICK_TAP := true
+TARGET_SUPPORTS_GOOGLE_RECORDER := true
+TARGET_INCLUDE_LIVE_WALLPAPERS := true
+TARGET_FACE_UNLOCK_SUPPORTED := true
+TARGET_ENABLE_BLUR := false
+
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := lineage_beryllium
+PRODUCT_NAME := aosp_beryllium
 PRODUCT_DEVICE := beryllium
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := Pocophone F1
